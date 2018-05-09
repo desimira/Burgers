@@ -10,6 +10,7 @@ let app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // for curl-based POST queries
 
 app.post('/burgers', (req, res) => {
     let burger = new Burger({
@@ -22,7 +23,7 @@ app.post('/burgers', (req, res) => {
 
     burger.save().then((doc) => {
         res.send(doc);
-    }, (e) => {
+    }).catch((e) => {
         res.status(400).send(e);
     });
 });
@@ -31,7 +32,7 @@ app.get('/burgers', (req, res) => {
     if(_.isEmpty(req.query)){
         Burger.find().then((burgs) => {
             res.send(burgs);
-        }, (e) => {
+        }).catch((e) => {
             res.status(400);
         });
     } else if(req.query.meat){
@@ -72,7 +73,7 @@ app.get('/burgers/:id', (req,res) => {
         if(!burgs) {
             return res.status(404).send()
         }
-        res.send({burgs});
+        res.send(burgs);
     }).catch((e) => {
         res.status(404).send();
     })

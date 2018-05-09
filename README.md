@@ -7,34 +7,30 @@ The project uses local MongoDB database.
 ```
 git clone https://github.com/desimira/burgers.git
 npm install
+cd burgers
 npm start
 ```
 
 ## Add new burger
 
-Add a new burger to the DB by post request using [Postmen](https://www.getpostman.com/apps).
+Add a new burger to the DB by post request.
 Every burger has a model of properties - type, meat, bread, price, ingredients.
 When making a request, it is required to fill "type" of burger ("vegetarian" or "non vevgetarian"). Other properties has default values and are optional, excluding "meat", wich is still optional, but has some validation (e.g. minimum length).
 
 ```
-http://localhost:3000/burgers
-{
-	"type": "vegeterian",
-	"bread": "whole wheat",
-	"price": 8
-}
+curl -d "type=vegeterian&bread=whole wheat&price=8" -X POST http://localhost:3000/burgers
 ```
 
 It returns:
 ```
 {
-        "price": 8,
-        "ingrediants": "",
-        "_id": "5af2c62fed1b28f260727e37",
-        "type": "vegeterian",
-        "bread": "whole wheat",
-        "__v": 0
-    }
+    "price": 8,
+    "ingredients": "",
+    "_id": "5af31d3f7c1beaf53e1dd7c4",
+    "type": "vegeterian",
+    "bread": "whole wheat",
+    "__v": 0
+}
 ```
 
 ## Get burgers
@@ -60,5 +56,5 @@ more to be added...
 Gets burger by its ID.
 
 ```
-http://localhost:3000/burgers/5af1defa92cdb8ea01b94058
+http://localhost:3000/burgers/5af321bb7c1beaf53e1dd7c6
 ```
