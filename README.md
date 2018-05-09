@@ -1,6 +1,6 @@
 # Burgers
 
-The project uses local MongoDB database.
+This is API project, it uses local MongoDB database.
 
 ## Start the project
 
