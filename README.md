@@ -38,15 +38,19 @@ It returns:
 Gets burgers from the API. You can list all burgers or filter the list by specifying optional parameters.
 
 ```
-http://localhost:3000/burgers
+curl http://localhost:3000/burgers
 ```
 
 Available filter options:
+
 Filter by meat:
 ```
-http://localhost:3000/burgers?meat=beef
+curl http://localhost:3000/burgers?meat=beef
 ```
-
+Filter by price, greater than:
+```
+curl http://localhost:3000/burgers?price_gt=10
+```
 more to be added...
 
 
@@ -56,5 +60,5 @@ more to be added...
 Gets burger by its ID.
 
 ```
-http://localhost:3000/burgers/5af321bb7c1beaf53e1dd7c6
+curl http://localhost:3000/burgers/5af321bb7c1beaf53e1dd7c6
 ```

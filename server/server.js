@@ -37,7 +37,7 @@ app.get('/burgers', (req, res) => {
         });
     } else if(req.query.meat){
         let meat = req.query.meat;
-
+        console.log(meat)
         Burger.find({meat}).then((burgs) => {
             if(!burgs) {
                 return res.status(404).send();
@@ -46,21 +46,18 @@ app.get('/burgers', (req, res) => {
         }).catch((e) => {
             res.status(404).send();
         })
-    }
-    // Next filter doesn't work but I guess it should be sth similar
-    // else if(req.query.price_gt){
-    //     let grt = Number(req.query.price_gt);
+    } else if(req.query.price_gt){
+        let grt = Number(req.query.price_gt);
 
-    //     Burger.find({price: {$gt:grt}}).then((burgs) => {
-    //         if(burgs){
-    //             return res.status(404).send();
-    //         }
-    //         res.send(burgs);
-    //     }).catch((e) => {
-    //         res.status(404).send();
-    //     })
-    // }
-    
+        Burger.find({price: {$gt:grt}}).then((burgs) => {
+            if(!burgs){
+                return res.status(404).send();
+            }
+            res.send(burgs);
+        }).catch((e) => {
+            res.status(404).send();
+        })
+    }
 });
 
 app.get('/burgers/:id', (req,res) => {
