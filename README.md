@@ -1,6 +1,6 @@
 # Burgers
 
-This is API project, it uses local MongoDB database.
+This is API project, it uses local MongoDB database and you need to download and run MongoDB on your computer if you don't have it.
 
 ## Start the project
 
