@@ -20,7 +20,7 @@ let Burger = mongoose.model('Burger', {
         type: Number,
         default: null
     },
-    ingrediants: {
+    ingredients: {
         type: String,
         default: "",
         trim: true

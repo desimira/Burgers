@@ -27,7 +27,6 @@ app.post('/burgers', (req, res) => {
     });
 });
 
-
 app.get('/burgers', (req, res) => {
     if(_.isEmpty(req.query)){
         Burger.find().then((burgs) => {
@@ -46,7 +45,8 @@ app.get('/burgers', (req, res) => {
         }).catch((e) => {
             res.status(404).send();
         })
-    } // unfortunately next filetr doesn't work but I think it should be sth similar
+    }
+    // Next filter doesn't work but I guess it should be sth similar
     // else if(req.query.price_gt){
     //     let grt = Number(req.query.price_gt);
 
@@ -78,21 +78,8 @@ app.get('/burgers/:id', (req,res) => {
     })
 })
 
-// app.get('/burgers/:meat', (req,res) => {
-//     let meat = req.params.meat;
-
-//     Burger.find({meat}).then((burgs) => {
-//         if(!burgs) {
-//             return res.status(404).send()
-//         }
-//         res.send({burgs});
-//     }).catch((e) => {
-//         res.status(404).send();
-//     })
-// })
-
 app.listen(port, () => {
-    console.log('Statred up at port:', port)
+    console.log('Started up at port:', port)
 });
 
 module.exports = {app}
