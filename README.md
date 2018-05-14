@@ -13,23 +13,45 @@ npm start
 
 ## Add new burger
 
-Add a new burger to the DB by post request.
-Every burger has a model of properties - type, meat, bread, price, ingredients.
-When making a request, it is required to fill "type" of burger ("vegetarian" or "non vevgetarian"). Other properties has default values and are optional, excluding "meat", wich is still optional, but has some validation (e.g. minimum length).
+Add a new burger to the DB by post request using Terminal or Postman.
+Every burger has a model of properties - name, type, meat, bread, price, ingredients, created.
+When making a request, it is required to fill unique "name" and "type" of burger ("vegetarian" or "non vevgetarian"). Other properties has specified types and ranges in between you have to choose. "Created" is a date and has default value at the time of adding the new data.
 
+Via Terminal:
 ```
-curl -d "type=vegeterian&bread=whole wheat&price=8" -X POST http://localhost:3000/burgers
+curl -d "name=New burger&type=non vegetarian&meat=beef&bread=oat&ingredients=["tomatoes", "cucumbers", "onion"]&price=11" -X POST http://localhost:3000/burgers
+```
+Via Postman:
+```
+    http://localhost:3000/burgers
+    {
+	"name": "New burgеr3",
+	"type": "non vegetarian",
+	"meat": "beef",
+	"bread": "oat",
+	"ingredients": ["tomatoes", "cucumbers", "onion"],
+	"price": 11
+    }
 ```
 
 It returns:
 ```
 {
-    "price": 8,
-    "ingredients": "",
-    "_id": "5af31d3f7c1beaf53e1dd7c4",
-    "type": "vegeterian",
-    "bread": "whole wheat",
+    {
+    "price": 11,
+    "ingredients": [
+        "tomatoes",
+        "cucumbers",
+        "onion"
+    ],
+    "created": "2018-05-14T08:54:59.069Z",
+    "_id": "5af95321b0436f2f80046945",
+    "name": "New burgеr3",
+    "type": "non vegetarian",
+    "meat": "beef",
+    "bread": "oat",
     "__v": 0
+}
 }
 ```
 
@@ -43,15 +65,51 @@ curl http://localhost:3000/burgers
 
 Available filter options:
 
+Filter by name:
+```
+curl http://localhost:3000/burgers?name=New%20burger
+```
+
+Filter by type:
+```
+curl http://localhost:3000/burgers?type=non%20vegetarian
+```
+
 Filter by meat:
 ```
 curl http://localhost:3000/burgers?meat=beef
 ```
+
+Filter by bread:
+```
+curl http://localhost:3000/burgers?bread=oat
+```
+
 Filter by price, greater than:
 ```
 curl http://localhost:3000/burgers?price_gt=10
 ```
-more to be added...
+
+Filter by price, lower than:
+```
+curl http://localhost:3000/burgers?price_lt=10
+```
+
+Filter by ingridients:
+```
+curl http://localhost:3000/burgers?ingredients=tomatoes,onion
+```
+
+Filter created before a date:
+```
+curl http://localhost:3000/burgers?created_bf=2018-05-12T15:25:44.669Z
+```
+
+Filter created after a date:
+```
+curl http://localhost:3000/burgers?created_af=2018-05-12T15:25:44.669Z
+```
+
 
 
 
@@ -61,4 +119,9 @@ Gets burger by its ID.
 
 ```
 curl http://localhost:3000/burgers/5af321bb7c1beaf53e1dd7c6
+```
+
+## Test the project
+```
+npm test
 ```
